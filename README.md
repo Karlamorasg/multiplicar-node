@@ -4,7 +4,7 @@
 
 Practica NODE
 
-EJecutar comandos
+Ejecutar comandos
 
 ,,,,
 

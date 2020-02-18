@@ -1,38 +1,52 @@
+// requireds
+const fs = require('fs');
+const colors = require('colors');
 
-const fs = require('fs') // archivos
+let listarTabla = (base, limite = 10) => {
+
+    console.log('=================='.green);
+    console.log(`tabla de ${ base }`.green);
+    console.log('=================='.green);
+
+    for (let i = 1; i <= limite; i++) {
+        console.log(`${ base } * ${ i } = ${ base * i }`)
+    }
 
 
-crearArchivo = (base) =>{
-    return new Promise ((resolve, reject) =>{
-        if(!Number(base)){
-            reject('la base no contiene un numero, verificar dato')
-            return
+}
+
+
+let crearArchivo = (base, limite = 10) => {
+
+    return new Promise((resolve, reject) => {
+
+        if (!Number(base)) {
+            reject(`El valor introducido ${ base } no es un número`);
+            return;
         }
-        let data = ''
-        for(let i=1; i <= 10; i++){
-            data += (`${base} * ${i} = ${base*i} \n`)
-          }
 
-          fs.writeFile(`Tablas/tabla- ${base}.txt`, data, (err) => { // le digo primero donde quiero gaurdar el archivo y luefo cual archivo cquiero crear, lugo los datos que le voy a poner y luego el callback para verificar que todo sale
-            if (err) {
-              reject (err)}
-            else{
-            resolve (`tabla-${base}.txt`)}
+        let data = '';
+
+        for (let i = 1; i <= limite; i++) {
+            data += `${ base } * ${ i } = ${ base * i }\n`;
+        }
+
+
+        fs.writeFile(`tablas/tabla-${ base }-al-${ limite }.txt`, data, (err) => {
+
+            if (err)
+                reject(err)
+            else
+                resolve(`tabla-${ base }-al-${ limite }.txt`);
+
         });
-        
-      
-    })
-  
 
-  }
+    });
 
-  module.exports ={
-      crearArchivo
-  }
+}
 
-
-
-
-
-
+module.exports = {
+    crearArchivo,
+    listarTabla
+}
 
